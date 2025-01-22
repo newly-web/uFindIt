@@ -24,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: /dashboard.php");
             exit;
         } else {
+            header("Location: /invalid.php");
             echo "Incorrect password!";
         }
     } else {
