@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Verify password
         if (password_verify($password, $user['password'])) {
             echo "Login successful! User ID: " . $user['id'];
-            header("Location: public/dashboard.php");
+            header("Location: /dashboard.php");
             exit;
         } else {
             echo "Incorrect password!";
