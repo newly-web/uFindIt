@@ -12,7 +12,7 @@ ini_set('display_errors', 1);
 ?>
 
 <body>
-    <form id="loginForm" method="POST" action=../backend/login.php">
+    <form id="loginForm" method="POST" action=../backend/login.php>
         <input type="email" name="email" placeholder="Email" required />
         <input type="password" name="password" placeholder="Password" required />
         <button type="submit" name="login">Log In</button>
