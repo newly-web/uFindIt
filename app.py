@@ -1,4 +1,4 @@
-from flask import Flask,render_template
+from flask import Flask,render_template, flash, redirect, url_for
 from forms import SignUpForm, LoginForm
 app = Flask(__name__)
 # this needs to be an ENV variable after
@@ -6,7 +6,7 @@ app.config['SECRET_KEY'] = '8393b6e6a5d2b2a673bebdcbe2af3b88'
 
 
 @app.route("/")
-def hello_world():
+def home():
     return render_template('home.html')
 
 
@@ -14,10 +14,17 @@ def hello_world():
 def about():
     return render_template("about.html", title="About")
 
-@app.route("/signup")
+
+@app.route("/signup", methods=["GET", "POST"])
 def signUp():
     form = SignUpForm()
-    return render_template('signup.html', title='Sign Up', form=form)
+    if form.validate_on_submit():
+        flash(f"Account created for {form.username.data}!", "success")
+        return redirect(url_for("home"))
+    else:
+        print(form.errors)  # Print errors to debug if validation fails
+    return render_template("signup.html", title="Sign Up", form=form)
+
 
 @app.route("/login")
 def login():

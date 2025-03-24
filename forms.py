@@ -9,15 +9,14 @@ class SignUpForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(),Length(min=5, max=20)])
 
     student_number = StringField('Student number', validators=[DataRequired(),
-        Length(min=9, max=9, message="Oops! Your School ID must have exactly 9 digits"),
-        Regexp(r"^\d{9}$", message="Mhh..Your School ID should contain only numbers")])
+        Length(min=9, max=9, message="Oops! Your School ID must have exactly 9 digits")])
 
     email = StringField(
         "Student email",
         validators=[
             DataRequired(),
             Email(),
-            Regexp(r"^[a-zA-Z0-9._%+-]+@uottawa\.ca$",message="Oops! Your email should end with @uottawa"),
+            Regexp(r'^[a-zA-Z0-9._%+-]+@uottawa\.ca$',message="Oops! Your email should end with @uottawa.ca"),
         ],
     )
     password = PasswordField('Password', validators=[DataRequired(), Length(min=3)])
@@ -27,7 +26,7 @@ class SignUpForm(FlaskForm):
 
 class LoginForm(FlaskForm):
     email = StringField(
-        "Student email", validators=[DataRequired(), Email(), uottawa_email_validator]
+        "Student email", validators=[DataRequired(), Email()]
     )
     password = PasswordField("Password", validators=[DataRequired(), Length(min=3)])
     remember = BooleanField('Remember Me')
