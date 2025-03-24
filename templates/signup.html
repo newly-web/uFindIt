@@ -1,59 +1,72 @@
 {% extends "layout.html" %}
-<!-- add css -->
+<!-- Add CSS -->
 {% block content %}
 <div class="content container mt-5">
-    <form action="" method="POST">
+    <form action="" method="POST" novalidate>
         {{ form.hidden_tag() }}
 
         <!-- Username Field -->
         <div class="form-group mb-3">
             <label for="username">{{ form.username.label }}</label>
-            {{ form.username(class="form-control", id="username") }}
+            
             {% if form.username.errors %}
-            <div class="alert alert-danger alert-sm mt-2 error-message" id="username-error">
+            {{ form.username(class="form-control is-invalid", id="username") }}
+            <div class="invalid-feedback" id="username-error">
                 {% for error in form.username.errors %}
-                <small class="mb-0">{{ error }}</small>
+                <span class="mb-0">{{ error }}</span>
                 {% endfor %}
             </div>
+            {% else %}
+                {{ form.username(class="form-control", id="username") }}
             {% endif %}
         </div>
 
         <!-- Student Number Field -->
         <div class="form-group mb-3">
             <label for="student_number">{{ form.student_number.label }}</label>
-            {{ form.student_number(class="form-control", id="student_number", oninput="this.value = this.value.replace(/[^0-9]/g, '')")}}
             {% if form.student_number.errors %}
-            <div class="alert alert-danger alert-sm mt-2 error-message" id="student-number-error">
+            {{ form.student_number(class="form-control is-invalid", id="student_number", oninput="this.value =
+            this.value.replace(/[^0-9]/g, '')") }}
+            <div class="invalid-feedback" id="student-number-error">
                 {% for error in form.student_number.errors %}
-                <small class="mb-0">{{ error }}</small>
+                <span class="mb-0">{{ error }}</span>
                 {% endfor %}
             </div>
+            {% else %}
+            {{ form.student_number(class="form-control", id="student_number", oninput="this.value =
+            this.value.replace(/[^0-9]/g, '')") }}
             {% endif %}
+        
         </div>
 
         <!-- Email Field -->
         <div class="form-group mb-3">
             <label for="email">{{ form.email.label }}</label>
-            {{ form.email(class="form-control", id="email") }}
             {% if form.email.errors %}
-            <div class="alert alert-danger alert-sm mt-2 error-message" id="email-error">
+            {{ form.email(class="form-control is-invalid", id="email") }}
+            <div class="invalid-feedback" id="email-error">
                 {% for error in form.email.errors %}
-                <small class="mb-0">{{ error }}</small>
+                <span class="mb-0">{{ error }}</span>
                 {% endfor %}
             </div>
+            {% else %}
+            {{ form.email(class="form-control", id="email") }}
             {% endif %}
         </div>
 
         <!-- Password Field -->
         <div class="form-group mb-3">
             <label for="password">{{ form.password.label }}</label>
-            {{ form.password(class="form-control", id="password") }}
+            
             {% if form.password.errors %}
-            <div class="alert alert-danger alert-sm mt-2 error-message" id="password-error">
+            {{ form.password(class="form-control is-invalid", id="password") }}
+            <div class="invalid-feedback" id="password-error">
                 {% for error in form.password.errors %}
-                <small class="mb-0">{{ error }}</small>
+                <span class="mb-0">{{ error }}</span>
                 {% endfor %}
             </div>
+            {%else%}
+            {{ form.password(class="form-control", id="password") }}
             {% endif %}
         </div>
 
@@ -79,7 +92,7 @@
 
         formFields.forEach(function (field) {
             field.addEventListener('input', function () {
-                const errorDiv = field.closest('.form-group').querySelector('.error-message');
+                const errorDiv = field.closest('.form-group').querySelector('.invalid-feedback');
                 if (errorDiv) {
                     errorDiv.style.display = 'none';
                 }

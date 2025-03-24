@@ -26,9 +26,16 @@ def signUp():
     return render_template("signup.html", title="Sign Up", form=form)
 
 
-@app.route("/login")
+@app.route("/login",methods=["GET", "POST"])
 def login():
     form = LoginForm()
+    if form.validate_on_submit():
+        # ? don't forget to remove the hard coded data
+        if form.email.data == 'admin@uottawa.ca' and form.password.data == '12345678':
+            flash('WE ARE INNNN', "success")
+            return redirect(url_for('home'))
+        else:
+            flash("this aint u lol.", 'danger')
     return render_template('login.html', title='Login', form=form)
 
 
