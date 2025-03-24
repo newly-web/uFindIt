@@ -11,7 +11,7 @@ def student_number_validator(form, field):
     if len(field.data) == 9 and not field.data.startswith(
         ("30", "20")
     ):  # Ensure the student number starts with 30 or 20
-        raise ValidationError("Are you sure this is a uOttawa student number")
+        raise ValidationError("Are you sure this is a uOttawa student number?")
 
 
 class SignUpForm(FlaskForm):
