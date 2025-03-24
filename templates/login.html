@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+<!-- Add CSS -->
+{% block content %}
+<div class="content container mt-5">
+    <form action="" method="POST" novalidate>
+        {{ form.hidden_tag() }}
+ 
+        <!-- Email Field -->
+        <div class="form-group mb-3">
+            <label for="email">{{ form.email.label }}</label>
+            {% if form.email.errors %}
+            {{ form.email(class="form-control is-invalid", id="email") }}
+            <div class="invalid-feedback" id="email-error">
+                {% for error in form.email.errors %}
+                <span class="mb-0">{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.email(class="form-control", id="email") }}
+            {% endif %}
+        </div>
+
+        <!-- Password Field -->
+        <div class="form-group mb-3">
+            <label for="password">{{ form.password.label }}</label>
+
+            {% if form.password.errors %}
+            {{ form.password(class="form-control is-invalid", id="password") }}
+            <div class="invalid-feedback" id="password-error">
+                {% for error in form.password.errors %}
+                <span class="mb-0">{{ error }}</span>
+                {% endfor %}
+            </div>
+            {%else%}
+            {{ form.password(class="form-control", id="password") }}
+            {% endif %}
+        </div>
+        <!-- Rmb me section -->
+        <div class="form-check">
+            {{form.remember(class='form-check-input')}}
+            {{form.remember.label(class='form-check-labe;')}}
+        </div>
+        <!-- Submit Button -->
+        <div class="form-group text-center">
+            {{ form.submit(class="btn btn-primary btn-lg") }}
+        </div>
+        <!-- Forgot pass section -->
+         <small class="text-muted ml-2"> 
+            <a href="#" target="_blank" rel="noopener noreferrer">
+                Forgot your password? 
+            </a>
+         </small>
+    </form>
+    <!-- Need an account -->
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            New here? <a class="ml-2" href="{{ url_for('signUp') }}">Create your account</a>
+        </small>
+    </div>
+</div>  
+    {%endblock content%}
