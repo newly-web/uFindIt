@@ -1,0 +1,7 @@
+<div class="category-nav">
+    {% for cat in categories %}
+    <a href="{{ url_for('view_category', category_id=cat.id) }}" class="category-link">
+        {{ cat.name }}
+    </a>
+    {% endfor %}
+</div>

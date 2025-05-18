@@ -1,0 +1,46 @@
+{% extends "layout_in.html" %}
+{% block content %}
+<h1>hey</h1>
+<form method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+
+    <div>
+        {{ form.category.label }}<br>
+        {{ form.category() }}
+    </div>
+
+    <div>
+        {{ form.item_name.label }}<br>
+        {{ form.item_name(size=40) }}
+    </div>
+
+    <div>
+        {{ form.date_lost.label }}<br>
+        {{ form.date_lost() }}
+    </div>
+
+    <div>
+        {{ form.location.label }}<br>
+        {{ form.location(size=40) }}
+    </div>
+
+    <div>
+        {{ form.description.label }}<br>
+        {{ form.description(rows=4, cols=40) }}
+    </div>
+
+    <div>
+        {{ form.reward.label }}<br>
+        {{ form.reward(size=40) }}
+    </div>
+
+    <div>
+        {{ form.image.label }}<br>
+        {{ form.image() }}
+    </div>
+
+    <div>
+        {{ form.submit() }}
+    </div>
+</form>
+{% endblock content %}

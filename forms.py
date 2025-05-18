@@ -1,6 +1,24 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
-from wtforms.validators import DataRequired, Length, Email, ValidationError, Regexp
+from wtforms import (
+    StringField,
+    PasswordField,
+    SubmitField,
+    BooleanField,
+    SelectField,
+    TextAreaField,
+    FileField,
+    IntegerField,
+    DateField,
+)
+
+from wtforms.validators import (
+    DataRequired,
+    Length,
+    Email,
+    ValidationError,
+    Regexp,
+    Optional,
+)
 
 
 def student_number_validator(form, field):
@@ -38,3 +56,20 @@ class LoginForm(FlaskForm):
     password = PasswordField("Password", validators=[DataRequired(), Length(min=3)])
     remember = BooleanField("Remember Me")
     submit = SubmitField("Login")
+
+
+# lost items form
+
+
+class LostItemForm(FlaskForm):
+    category = SelectField("Category", coerce=int, validators=[DataRequired()])
+    item_name = StringField("What did you lose?", validators=[DataRequired()])
+    date_lost = DateField("Date Lost", format="%Y-%m-%d", validators=[DataRequired()])
+    description = TextAreaField(
+        "Details (when, where, etc.)", validators=[DataRequired()]
+    )
+    image = FileField("Image (if you have any)") 
+    location = StringField("Location Lost", validators=[DataRequired()])
+    reward = IntegerField("Reward (optional, but might help!)", validators=[Optional()])
+   
+    submit = SubmitField("Report Lost Item")
